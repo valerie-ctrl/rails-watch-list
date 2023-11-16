@@ -1,0 +1,23 @@
+<h2><%= @list.name %></h2>
+
+<%= link_to "Back to lists", lists_path %>
+
+<% @list.movies.each do |movie| %>
+  <div>
+    <h5><%= movie.title %></h5>
+    <p>Rating <%= movie.rating.truncate(1) %></p>
+    <%= image_tag movie.poster_url, width: '300px' %>
+    <p><%= movie.overview %></p>
+    <% bookmark = movie.bookmarks.find_by(list: @list) %>
+    <p><%= bookmark.comment %></p>
+    <%= link_to content_tag(:i,"", class: ['fa-solid', 'fa-trash-can']), delete_bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+  </div>
+<% end %>
+
+<h4>Add a new movie</h4>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.association :movie %>
+  <%= f.input :comment %>
+  <%= f.button :submit, class: 'btn btn-primary' %>
+<% end %>

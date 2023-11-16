@@ -1,0 +1,18 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://149512919.v2.pressablecdn.com/wp-content/uploads/2021/12/philly-movies-hero-banner.jpg);">
+  <div class="container">
+    <h1 class="text-center">All your watchlists</h1>
+  </div>
+</div>
+
+<div class="container w-50 mx-auto">
+  <% @lists.each do |list| %>
+    <div class="card-product">
+      <%= image_tag list.movies.any? ? list.movies.last.poster_url : 'https://njlaundromats.com/wp-content/uploads/2018/09/movie_laundromat-1.jpg' %>
+      <div class="card-product-infos">
+        <%= link_to list.name, list_path(list) %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Create a movie list", new_list_path %>
