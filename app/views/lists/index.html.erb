@@ -3,16 +3,15 @@
     <h1 class="text-center">All your watchlists</h1>
   </div>
 </div>
-
-<div class="container w-50 mx-auto">
+<div class="container w-50 mx-auto text-end my-4">
+  <%= link_to "Create a movie list", new_list_path, class: 'btn btn-primary mb-3' %>
   <% @lists.each do |list| %>
-    <div class="card-product">
+    <div class="card-product my-3">
       <%= image_tag list.movies.any? ? list.movies.last.poster_url : 'https://njlaundromats.com/wp-content/uploads/2018/09/movie_laundromat-1.jpg' %>
-      <div class="card-product-infos">
-        <%= link_to list.name, list_path(list) %>
+      <div class="card-product-infos d-flex justify-content-between">
+        <h4><%= list.name %></h4>
+        <%= link_to "Go to the list", list_path(list) %>
       </div>
     </div>
   <% end %>
 </div>
-
-<%= link_to "Create a movie list", new_list_path %>
